@@ -1,7 +1,11 @@
 <template>
   <div class="home">
     <h1>Home</h1>
-    <PostList :posts="posts" v-if="showPosts" />
+    <div v-if="error">{{ error }}</div>
+    <div v-if="posts.length">
+      <PostList :posts="posts" />
+    </div>
+    <div v-else>LOADING...</div>
   </div>
 </template>
 
@@ -12,20 +16,25 @@ import { ref } from '@vue/reactivity';
 export default {
   name: 'HomeView',
   setup() {
-    const posts = ref([
-      {
-        title: 'welcome to the blog',
-        body: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. In atque iste error voluptatem! Error nobis praesentium blanditiis illo quidem, cupiditate deserunt distinctio molestias non, dolorum sit asperiores esse harum iure aperiam? Debitis facere obcaecati hic quibusdam, modi error esse dolores reiciendis laborum magni eaque adipisci praesentium laboriosam inventore quo.',
-        id: 1,
-      },
-      {
-        title: 'top 5 CSS tips',
-        body: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. In atque iste error voluptatem! Error nobis praesentium blanditiis illo quidem, cupiditate deserunt distinctio molestias non, dolorum sit asperiores esse harum iure aperiam? Debitis facere obcaecati hic quibusdam, modi error esse dolores reiciendis laborum magni eaque adipisci praesentium laboriosam inventore quo.',
-        id: 2,
-      },
-    ]);
+    const posts = ref([]);
     const showPosts = ref(true);
-    return { posts, showPosts };
+    const error = ref(null);
+
+    const load = async () => {
+      try {
+        let data = await fetch('http://localhost:3000/posts');
+        if (!data.ok) {
+          throw Error('No data available');
+        }
+        posts.value = await data.json();
+      } catch (err) {
+        error.value = err.message;
+      }
+    };
+
+    load();
+
+    return { posts, error };
   },
   components: { PostList },
 };
