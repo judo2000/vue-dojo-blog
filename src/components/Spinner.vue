@@ -36,10 +36,10 @@
   line-height: 150px;
   font-family: sans-serif;
   font-size: 20px;
-  color: #fff000;
+  color: #ff8800;
   letter-spacing: 4px;
   text-transform: uppercase;
-  text-shadow: 0 0 10px #fff000;
+  text-shadow: 0 0 10px #ff8800;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
 }
 .ring:before {
@@ -50,8 +50,8 @@
   width: 100%;
   height: 100%;
   border: 3px solid transparent;
-  border-top: 3px solid #fff000;
-  border-right: 3px solid #fff000;
+  border-top: 3px solid #ff8800;
+  border-right: 3px solid #ff8800;
   border-radius: 50%;
   animation: animateC 2s linear infinite;
 }
@@ -72,10 +72,10 @@ span.spinner:before {
   width: 16px;
   height: 16px;
   border-radius: 50%;
-  background: #fff000;
+  background: #ff8800;
   top: -6px;
   right: -8px;
-  box-shadow: 0 0 20px #fff000;
+  box-shadow: 0 0 20px #ff8800;
 }
 @keyframes animateC {
   0% {
