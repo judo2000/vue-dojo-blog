@@ -81,6 +81,15 @@
         "test"
       ],
       "id": 9
+    },
+    {
+      "title": "Testing redirect",
+      "body": "This is a test of the redirect functionality inside setup",
+      "tags": [
+        "redirect",
+        "routing"
+      ],
+      "id": 10
     }
   ]
 }

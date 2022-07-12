@@ -31,21 +31,20 @@ export default {
       tag.value = ''; // clear the tag field so a user can add another tag
     };
     const router = useRouter();
+
     const handleSubmit = async () => {
-      try {
-        const post = {
-          title: title.value,
-          body: body.value,
-          tags: tags.value,
-        };
-        await fetch('http://localhost:3000/posts', {
-          method: 'POST',
-          headers: { 'Content-type': 'application/json' },
-          body: JSON.stringify(post),
-        });
-      } catch (err) {
-        console.log(err.message);
-      }
+      const post = {
+        title: title.value,
+        body: body.value,
+        tags: tags.value,
+      };
+      await fetch('http://localhost:3000/posts', {
+        method: 'POST',
+        headers: { 'Content-type': 'application/json' },
+        body: JSON.stringify(post),
+      });
+
+      router.push({ name: 'Home' });
     };
 
     return { title, body, tag, handleKeydown, tags, handleSubmit };
