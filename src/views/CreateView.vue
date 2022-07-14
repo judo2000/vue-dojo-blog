@@ -14,8 +14,10 @@
 </template>
 
 <script>
-import { ref } from '@vue/reactivity';
+import { ref } from 'vue';
 import { useRouter } from 'vue-router';
+import { projectFirestore, timestamp } from '@/firebase/config';
+import { addDoc, collection } from '@firebase/firestore';
 export default {
   setup() {
     const title = ref('');
@@ -37,17 +39,16 @@ export default {
         title: title.value,
         body: body.value,
         tags: tags.value,
+        createdAt: timestamp,
       };
-      await fetch('http://localhost:3000/posts', {
-        method: 'POST',
-        headers: { 'Content-type': 'application/json' },
-        body: JSON.stringify(post),
-      });
+      const postsRef = collection(projectFirestore, 'posts');
+
+      const res = await addDoc(postsRef, post);
 
       router.push({ name: 'Home' });
     };
 
-    return { title, body, tag, handleKeydown, tags, handleSubmit };
+    return { title, body, tag, tags, handleKeydown, handleSubmit };
   },
 };
 </script>
