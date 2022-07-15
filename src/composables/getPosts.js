@@ -11,7 +11,7 @@ const getPosts = () => {
       const postsRef = collection(projectFirestore, 'posts');
       const q = query(postsRef, orderBy('createdAt', 'desc'));
       const querySnapshot = await getDocs(q);
-      //console.log(querySnapshot.docs, 'this is snapshot');
+
       posts.value = querySnapshot.docs.map((doc) => {
         return { ...doc.data(), id: doc.id };
       });
