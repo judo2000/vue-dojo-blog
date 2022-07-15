@@ -3,7 +3,7 @@
   <div v-if="post" class="post">
     <h3>{{ post.title }}</h3>
     <p class="pre">{{ post.body }}</p>
-    <button @click="handleClick">Delete Post</button>
+    <button class="delete" @click="handleClick">Delete Post</button>
   </div>
   <div v-else><Spinner /></div>
 </template>
@@ -49,5 +49,8 @@ export default {
 }
 .pre {
   white-space: pre-wrap;
+}
+button.delete {
+  margin: 10px auto;
 }
 </style>
